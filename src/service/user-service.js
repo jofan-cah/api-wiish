@@ -50,7 +50,8 @@ const login = async (request) => {
         select: {
             id:true,
             email: true,
-            password: true
+            password: true,
+            name:true
         }
     });
 
@@ -74,11 +75,14 @@ const login = async (request) => {
         },
         select: {
             email:true,
+            password:true,
             token: true,
             phone: true,
             age:true,
             weight:true,
             gender:true,
+            name:true,
+            height:true,
             id:true
         }
     });
@@ -95,10 +99,12 @@ const get = async (email) => {
         select: {
             email: true,
             name: true,
+            password:true,
             phone: true,
             age:true,
             weight:true,
             gender:true,
+            height:true,
             id:true
         }
     });
@@ -127,9 +133,27 @@ const update = async (request) => {
     if (user.name) {
         data.name = user.name;
     }
+
+
+
     if (user.phone) {
         data.phone = user.phone;
     }
+
+
+    if (user.gender) {
+        data.gender = user.gender;
+    }
+    if (user.height) {
+        data.height = user.height;
+    }
+    if (user.weight) {
+        data.weight = user.weight;
+    }
+    if (user.age) {
+        data.age = user.age;
+    }
+
     if (user.password) {
         data.password = await bcrypt.hash(user.password, 10);
     }
@@ -141,11 +165,14 @@ const update = async (request) => {
         },
         data: data,
         select: {
+
             email: true,
             name: true,
             phone:true,
             age:true,
-            weight:true
+            weight:true,
+            gender:true,
+
         }
     })
 }
